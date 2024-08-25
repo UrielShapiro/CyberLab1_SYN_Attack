@@ -23,7 +23,6 @@ services:
               apt-get update && apt-get install -y openbsd-inetd &&
               /etc/init.d/openbsd-inetd start  &&
               cd /volumes &&
-              make &&
               ./syn_flood &&
               tail -f /dev/null"
     cap_add:
@@ -37,10 +36,9 @@ services:
     container_name: monitor-all
     network_mode: host
     command: bash -c "
-              apt-get update && apt-get install -y openbsd-inetd &&
+              apt-get update && apt-get install -y openbsd-inetd && apt-get install -y iputils-ping &&
               /etc/init.d/openbsd-inetd start &&
-              ping -i 1 10.9.0.2 > /volumes/ping_results.txt &&
-              tail -f /dev/null"
+              ping 10.9.0.2 > /volumes/ping.txt"
     cap_add:
       - ALL
     privileged: true

