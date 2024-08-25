@@ -110,7 +110,7 @@ int main()
             mask4 = rand() % MASK;
             char src_ip[16];
             snprintf(src_ip, sizeof(src_ip), "%d.%d.%d.%d", mask1, mask2, mask3, mask4);
-            printf("Sending packet from %s\n", src_ip);
+            // printf("Sending packet from %s\n", src_ip);
             // Fill in the IP Header
             iph->ihl = 5;
             iph->version = 4;
