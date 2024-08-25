@@ -12,6 +12,7 @@
 
 #define SOURCE_PORT 12345
 #define MASK 256
+#define PACKET_SIZE 1 << 12
 #define SERVER_IP "10.9.0.2"
 #define SERVER_PORT 80
 #define BUFFER_SIZE 1024
@@ -90,8 +91,8 @@ int main()
     }
 
     // Create buffer for the packet
-    char packet[4096];
-    memset(packet, 0, 4096);
+    char packet[PACKET_SIZE];
+    memset(packet, 0, PACKET_SIZE);
 
     // Fill in the IP Header
     struct iphdr *iph = (struct iphdr *)packet;
@@ -105,12 +106,12 @@ int main()
         for (size_t i = 0; i < NUM_OF_TRIES; i++)
         {
             mask1 = rand() % MASK;
-            mask2 = rand() % MASK;
+            mask2 = rand() % MASK; 
             mask3 = rand() % MASK;
             mask4 = rand() % MASK;
             char src_ip[16];
             snprintf(src_ip, sizeof(src_ip), "%d.%d.%d.%d", mask1, mask2, mask3, mask4);
-            // printf("Sending packet from %s\n", src_ip);
+            
             // Fill in the IP Header
             iph->ihl = 5;
             iph->version = 4;
