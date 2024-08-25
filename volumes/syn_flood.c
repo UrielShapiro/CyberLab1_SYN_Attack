@@ -49,30 +49,6 @@ int main()
     int sock;
     int mask1, mask2, mask3, mask4;
 
-    // char hostbuffer[256];
-    // struct hostent *host_entry;
-    // int hostname;
-    // struct in_addr **addr_list;
-
-    // // retrieve hostname
-    // hostname = gethostname(hostbuffer, sizeof(hostbuffer));
-    // if (hostname == -1)
-    // {
-    //     perror("gethostname error");
-    //     exit(1);
-    // }
-    // // Retrieve IP addresses
-    // host_entry = gethostbyname(hostbuffer);
-    // if (host_entry == NULL)
-    // {
-    //     perror("gethostbyname error");
-    //     exit(1);
-    // }
-    // addr_list = (struct in_addr **)host_entry->h_addr_list;
-    // printf("IP address: %s\n", inet_ntoa(*addr_list[0]));
-
-    // char *src_ip = inet_ntoa(*addr_list[0]);
-
     // Create a socket
     sock = socket(AF_INET, SOCK_RAW, IPPROTO_TCP);
     if (sock < 0)
