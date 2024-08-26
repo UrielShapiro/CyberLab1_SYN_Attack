@@ -1,14 +1,13 @@
+#define _GNU_SOURCE // for clock_gettime
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <netinet/udp.h>
 #include <netinet/ip.h>
+#include <netinet/tcp.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
-#include <sys/types.h>
-#include <netdb.h>
-#include <netinet/tcp.h>
+#include <time.h>
 
 #define SOURCE_PORT 12345
 #define MASK 256
@@ -48,12 +47,26 @@ int main()
 {
     int sock;
     int mask1, mask2, mask3, mask4;
+     FILE *log_file;
+     struct timespec start, end;
+    double time_taken;
+    long total_packets = 0; 
+    double total_time = 0.0;
+
+    // Open log file
+    log_file = fopen("syn_flood_log.txt", "w");
+    if (log_file == NULL)
+    {
+        printf("Error opening file!\n");
+        exit(1);
+    }
 
     // Create a socket
     sock = socket(AF_INET, SOCK_RAW, IPPROTO_TCP);
     if (sock < 0)
     {
         perror("Socket creation failed");
+        fclose(log_file);
         exit(EXIT_FAILURE);
     }
 
@@ -63,6 +76,7 @@ int main()
     {
         perror("Setsockopt failed");
         close(sock);
+        fclose(log_file);
         return 1;
     }
 
@@ -81,6 +95,7 @@ int main()
     {
         for (size_t i = 0; i < NUM_OF_TRIES; i++)
         {
+            clock_gettime(CLOCK_MONOTONIC, &start);
             mask1 = rand() % MASK;
             mask2 = rand() % MASK; 
             mask3 = rand() % MASK;
@@ -144,12 +159,25 @@ int main()
             {
                 perror("Send failed");
             }
+              clock_gettime(CLOCK_MONOTONIC, &end);
+
+            time_taken = (end.tv_sec - start.tv_sec) * 1e9;
+            time_taken = (time_taken + (end.tv_nsec - start.tv_nsec)) * 1e-9;
+
+            total_packets++;
+            total_time += time_taken;
+
+            fprintf(log_file, "%ld %.9f\n", total_packets, time_taken);
             free(pseudogram);
         }
     }
+ double avg_time = total_time / total_packets;
+    fprintf(log_file, "Total packets sent: %ld\n", total_packets);
+    fprintf(log_file, "Total time taken: %.9f seconds\n", total_time);
+    fprintf(log_file, "Average time per packet: %.9f seconds\n", avg_time);
 
     close(sock);
-    printf("\nConnection closed.\n");
-
+    fclose(log_file);
+    printf("\nConnection closed. Results logged to syns_results_c.txt\n");
     return 0;
 }
