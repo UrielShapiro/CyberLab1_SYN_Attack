@@ -12,12 +12,20 @@ services:
         ipv4_address: 10.9.0.2
     ports:
       - "80:80"
+    volumes:
+      - ./volumes:/volumes
     command: >
       bash -c "
         apt-get update &&
         apt-get install -y net-tools tcpdump &&
-        httpd-foreground
-      "
+        echo \"Container started at: $(date)\" > /volumes/netstat_output.txt &&
+        httpd-foreground &
+        while true; do
+          echo \"Timestamp: $(date)\" >> /volumes/netstat_output.txt
+          netstat -tuna >> /volumes/netstat_output.txt
+          echo \"----------------------------------------\" >> /volumes/netstat_output.txt
+          sleep 3
+        done"
 
   Attacker:
     image: python:3.10
@@ -29,7 +37,6 @@ services:
       bash -c "
         apt-get update && 
         apt-get install -y iputils-ping net-tools &&
-        pip install scapy &&
         cd /volumes &&
         python3 syn_flood.py
       "
@@ -46,16 +53,17 @@ services:
       net-10.9.0.0:
         ipv4_address: 10.9.0.4
     command: >
-      bash -c "
+       bash -c "
         apt-get update &&
         apt-get install -y iputils-ping &&
         mkdir -p /volumes &&
+        echo \"Container started at: $(date)\" > /volumes/ping.txt &&
         while true; do
-          ping -c 10 -i 0.2 10.9.0.2 | tee -a /volumes/ping.txt;
-          echo '---' >> /volumes/ping.txt;
-          sleep 1;
-        done
-      "
+          echo \"Timestamp: $(date)\" >> /volumes/ping.txt
+          ping -c 10 -i 0.2 10.9.0.2 | tee -a /volumes/ping.txt
+          echo '---' >> /volumes/ping.txt
+          sleep 3
+        done"
     cap_add:
       - ALL
     privileged: true
