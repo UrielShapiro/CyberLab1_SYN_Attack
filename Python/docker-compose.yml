@@ -1,0 +1,70 @@
+version: '3'
+
+services:
+  ApacheServer:
+    image: httpd:latest
+    container_name: apache-10.9.0.2
+    cap_add:
+      - ALL
+    privileged: true
+    networks:
+      net-10.9.0.0:
+        ipv4_address: 10.9.0.2
+    ports:
+      - "80:80"
+    command: >
+      bash -c "
+        apt-get update &&
+        apt-get install -y net-tools tcpdump &&
+        httpd-foreground
+      "
+
+  Attacker:
+    image: python:3.10
+    container_name: attacker-10.9.0.3
+    networks:
+      net-10.9.0.0:
+        ipv4_address: 10.9.0.3
+    command: >
+      bash -c "
+        apt-get update && 
+        apt-get install -y iputils-ping net-tools &&
+        pip install scapy &&
+        cd /volumes &&
+        python3 syn_flood.py
+      "
+    cap_add:
+      - ALL
+    privileged: true
+    volumes:
+      - ./volumes:/volumes
+
+  Monitor:
+    image: ubuntu:latest
+    container_name: monitor-all
+    networks:
+      net-10.9.0.0:
+        ipv4_address: 10.9.0.4
+    command: >
+      bash -c "
+        apt-get update &&
+        apt-get install -y iputils-ping &&
+        mkdir -p /volumes &&
+        while true; do
+          ping -c 10 -i 0.2 10.9.0.2 | tee -a /volumes/ping.txt;
+          echo '---' >> /volumes/ping.txt;
+          sleep 1;
+        done
+      "
+    cap_add:
+      - ALL
+    privileged: true
+    volumes:
+      - ./volumes:/volumes
+
+networks:
+  net-10.9.0.0:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.9.0.0/24
