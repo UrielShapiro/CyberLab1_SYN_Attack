@@ -1,0 +1,438 @@
+Container started at: Wed Aug 28 12:04:45 UTC 2024
+Timestamp: Wed Aug 28 12:04:47 UTC 2024
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.11:43179        0.0.0.0:*               LISTEN     
+tcp        0      0 10.9.0.2:38078          151.101.242.132:80      TIME_WAIT  
+udp        0      0 127.0.0.11:44061        0.0.0.0:*                          
+----------------------------------------
+Timestamp: Wed Aug 28 12:04:50 UTC 2024
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.11:43179        0.0.0.0:*               LISTEN     
+tcp        0      0 10.9.0.2:80             118.117.169.156:64851   SYN_RECV   
+tcp        0      0 10.9.0.2:38078          151.101.242.132:80      TIME_WAIT  
+udp        0      0 127.0.0.11:44061        0.0.0.0:*                          
+----------------------------------------
+Timestamp: Wed Aug 28 12:04:54 UTC 2024
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.11:43179        0.0.0.0:*               LISTEN     
+tcp        0      0 10.9.0.2:80             118.117.169.156:64851   SYN_RECV   
+tcp        0      0 10.9.0.2:38078          151.101.242.132:80      TIME_WAIT  
+udp        0      0 127.0.0.11:44061        0.0.0.0:*                          
+----------------------------------------
+Timestamp: Wed Aug 28 12:04:57 UTC 2024
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.11:43179        0.0.0.0:*               LISTEN     
+tcp        0      0 10.9.0.2:80             187.230.153.100:20072   SYN_RECV   
+tcp        0      0 10.9.0.2:80             118.117.169.156:64851   SYN_RECV   
+tcp        0      0 10.9.0.2:38078          151.101.242.132:80      TIME_WAIT  
+udp        0      0 127.0.0.11:44061        0.0.0.0:*                          
+----------------------------------------
+Timestamp: Wed Aug 28 12:05:00 UTC 2024
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.11:43179        0.0.0.0:*               LISTEN     
+tcp        0      0 10.9.0.2:80             187.230.153.100:20072   SYN_RECV   
+tcp        0      0 10.9.0.2:80             118.117.169.156:64851   SYN_RECV   
+tcp        0      0 10.9.0.2:38078          151.101.242.132:80      TIME_WAIT  
+udp        0      0 127.0.0.11:44061        0.0.0.0:*                          
+----------------------------------------
+Timestamp: Wed Aug 28 12:05:03 UTC 2024
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.11:43179        0.0.0.0:*               LISTEN     
+tcp        0      0 10.9.0.2:80             92.226.230.33:61766     SYN_RECV   
+tcp        0      0 10.9.0.2:80             187.230.153.100:20072   SYN_RECV   
+tcp        0      0 10.9.0.2:80             118.117.169.156:64851   SYN_RECV   
+tcp        0      0 10.9.0.2:38078          151.101.242.132:80      TIME_WAIT  
+udp        0      0 127.0.0.11:44061        0.0.0.0:*                          
+----------------------------------------
+Timestamp: Wed Aug 28 12:05:06 UTC 2024
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.11:43179        0.0.0.0:*               LISTEN     
+tcp        0      0 10.9.0.2:80             92.226.230.33:61766     SYN_RECV   
+tcp        0      0 10.9.0.2:80             187.230.153.100:20072   SYN_RECV   
+tcp        0      0 10.9.0.2:80             118.117.169.156:64851   SYN_RECV   
+tcp        0      0 10.9.0.2:80             91.59.124.199:44806     SYN_RECV   
+tcp        0      0 10.9.0.2:38078          151.101.242.132:80      TIME_WAIT  
+tcp        0      0 10.9.0.2:80             2.237.31.225:52709      SYN_RECV   
+udp        0      0 127.0.0.11:44061        0.0.0.0:*                          
+----------------------------------------
+Timestamp: Wed Aug 28 12:05:09 UTC 2024
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.11:43179        0.0.0.0:*               LISTEN     
+tcp        0      0 10.9.0.2:80             92.226.230.33:61766     SYN_RECV   
+tcp        0      0 10.9.0.2:80             187.230.153.100:20072   SYN_RECV   
+tcp        0      0 10.9.0.2:80             118.117.169.156:64851   SYN_RECV   
+tcp        0      0 10.9.0.2:80             91.59.124.199:44806     SYN_RECV   
+tcp        0      0 10.9.0.2:38078          151.101.242.132:80      TIME_WAIT  
+tcp        0      0 10.9.0.2:80             116.122.57.16:57502     SYN_RECV   
+tcp        0      0 10.9.0.2:80             2.237.31.225:52709      SYN_RECV   
+udp        0      0 127.0.0.11:44061        0.0.0.0:*                          
+----------------------------------------
+Timestamp: Wed Aug 28 12:05:12 UTC 2024
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.11:43179        0.0.0.0:*               LISTEN     
+tcp        0      0 10.9.0.2:80             92.226.230.33:61766     SYN_RECV   
+tcp        0      0 10.9.0.2:80             187.230.153.100:20072   SYN_RECV   
+tcp        0      0 10.9.0.2:80             118.117.169.156:64851   SYN_RECV   
+tcp        0      0 10.9.0.2:80             91.59.124.199:44806     SYN_RECV   
+tcp        0      0 10.9.0.2:38078          151.101.242.132:80      TIME_WAIT  
+tcp        0      0 10.9.0.2:80             5.192.136.91:1206       SYN_RECV   
+tcp        0      0 10.9.0.2:80             116.122.57.16:57502     SYN_RECV   
+tcp        0      0 10.9.0.2:80             2.237.31.225:52709      SYN_RECV   
+udp        0      0 127.0.0.11:44061        0.0.0.0:*                          
+----------------------------------------
+Timestamp: Wed Aug 28 12:05:15 UTC 2024
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.11:43179        0.0.0.0:*               LISTEN     
+tcp        0      0 10.9.0.2:80             92.226.230.33:61766     SYN_RECV   
+tcp        0      0 10.9.0.2:80             32.111.36.72:5896       SYN_RECV   
+tcp        0      0 10.9.0.2:80             187.230.153.100:20072   SYN_RECV   
+tcp        0      0 10.9.0.2:80             118.117.169.156:64851   SYN_RECV   
+tcp        0      0 10.9.0.2:80             91.59.124.199:44806     SYN_RECV   
+tcp        0      0 10.9.0.2:38078          151.101.242.132:80      TIME_WAIT  
+tcp        0      0 10.9.0.2:80             5.192.136.91:1206       SYN_RECV   
+tcp        0      0 10.9.0.2:80             116.122.57.16:57502     SYN_RECV   
+tcp        0      0 10.9.0.2:80             2.237.31.225:52709      SYN_RECV   
+udp        0      0 127.0.0.11:44061        0.0.0.0:*                          
+----------------------------------------
+Timestamp: Wed Aug 28 12:05:18 UTC 2024
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.11:43179        0.0.0.0:*               LISTEN     
+tcp        0      0 10.9.0.2:80             92.226.230.33:61766     SYN_RECV   
+tcp        0      0 10.9.0.2:80             32.111.36.72:5896       SYN_RECV   
+tcp        0      0 10.9.0.2:80             187.230.153.100:20072   SYN_RECV   
+tcp        0      0 10.9.0.2:80             118.117.169.156:64851   SYN_RECV   
+tcp        0      0 10.9.0.2:80             91.59.124.199:44806     SYN_RECV   
+tcp        0      0 10.9.0.2:38078          151.101.242.132:80      TIME_WAIT  
+tcp        0      0 10.9.0.2:80             5.192.136.91:1206       SYN_RECV   
+tcp        0      0 10.9.0.2:80             116.122.57.16:57502     SYN_RECV   
+tcp        0      0 10.9.0.2:80             2.237.31.225:52709      SYN_RECV   
+udp        0      0 127.0.0.11:44061        0.0.0.0:*                          
+----------------------------------------
+Timestamp: Wed Aug 28 12:05:21 UTC 2024
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.11:43179        0.0.0.0:*               LISTEN     
+tcp        0      0 10.9.0.2:80             92.226.230.33:61766     SYN_RECV   
+tcp        0      0 10.9.0.2:80             32.111.36.72:5896       SYN_RECV   
+tcp        0      0 10.9.0.2:80             187.230.153.100:20072   SYN_RECV   
+tcp        0      0 10.9.0.2:80             118.117.169.156:64851   SYN_RECV   
+tcp        0      0 10.9.0.2:80             91.59.124.199:44806     SYN_RECV   
+tcp        0      0 10.9.0.2:38078          151.101.242.132:80      TIME_WAIT  
+tcp        0      0 10.9.0.2:80             5.192.136.91:1206       SYN_RECV   
+tcp        0      0 10.9.0.2:80             116.122.57.16:57502     SYN_RECV   
+tcp        0      0 10.9.0.2:80             172.54.140.107:46418    SYN_RECV   
+tcp        0      0 10.9.0.2:80             2.237.31.225:52709      SYN_RECV   
+udp        0      0 127.0.0.11:44061        0.0.0.0:*                          
+----------------------------------------
+Timestamp: Wed Aug 28 12:05:24 UTC 2024
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.11:43179        0.0.0.0:*               LISTEN     
+tcp        0      0 10.9.0.2:80             92.226.230.33:61766     SYN_RECV   
+tcp        0      0 10.9.0.2:80             32.111.36.72:5896       SYN_RECV   
+tcp        0      0 10.9.0.2:80             187.230.153.100:20072   SYN_RECV   
+tcp        0      0 10.9.0.2:80             118.117.169.156:64851   SYN_RECV   
+tcp        0      0 10.9.0.2:80             79.165.45.93:13310      SYN_RECV   
+tcp        0      0 10.9.0.2:80             91.59.124.199:44806     SYN_RECV   
+tcp        0      0 10.9.0.2:38078          151.101.242.132:80      TIME_WAIT  
+tcp        0      0 10.9.0.2:80             5.192.136.91:1206       SYN_RECV   
+tcp        0      0 10.9.0.2:80             116.122.57.16:57502     SYN_RECV   
+tcp        0      0 10.9.0.2:80             172.54.140.107:46418    SYN_RECV   
+tcp        0      0 10.9.0.2:80             2.237.31.225:52709      SYN_RECV   
+udp        0      0 127.0.0.11:44061        0.0.0.0:*                          
+----------------------------------------
+Timestamp: Wed Aug 28 12:05:27 UTC 2024
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.11:43179        0.0.0.0:*               LISTEN     
+tcp        0      0 10.9.0.2:80             92.226.230.33:61766     SYN_RECV   
+tcp        0      0 10.9.0.2:80             32.111.36.72:5896       SYN_RECV   
+tcp        0      0 10.9.0.2:80             250.250.145.163:13915   SYN_RECV   
+tcp        0      0 10.9.0.2:80             187.230.153.100:20072   SYN_RECV   
+tcp        0      0 10.9.0.2:80             118.117.169.156:64851   SYN_RECV   
+tcp        0      0 10.9.0.2:80             79.165.45.93:13310      SYN_RECV   
+tcp        0      0 10.9.0.2:80             91.59.124.199:44806     SYN_RECV   
+tcp        0      0 10.9.0.2:38078          151.101.242.132:80      TIME_WAIT  
+tcp        0      0 10.9.0.2:80             92.114.162.204:20032    SYN_RECV   
+tcp        0      0 10.9.0.2:80             5.192.136.91:1206       SYN_RECV   
+tcp        0      0 10.9.0.2:80             116.122.57.16:57502     SYN_RECV   
+tcp        0      0 10.9.0.2:80             104.252.112.252:38549   SYN_RECV   
+tcp        0      0 10.9.0.2:80             172.54.140.107:46418    SYN_RECV   
+tcp        0      0 10.9.0.2:80             2.237.31.225:52709      SYN_RECV   
+udp        0      0 127.0.0.11:44061        0.0.0.0:*                          
+----------------------------------------
+Timestamp: Wed Aug 28 12:05:30 UTC 2024
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.11:43179        0.0.0.0:*               LISTEN     
+tcp        0      0 10.9.0.2:80             92.226.230.33:61766     SYN_RECV   
+tcp        0      0 10.9.0.2:80             32.111.36.72:5896       SYN_RECV   
+tcp        0      0 10.9.0.2:80             250.250.145.163:13915   SYN_RECV   
+tcp        0      0 10.9.0.2:80             187.230.153.100:20072   SYN_RECV   
+tcp        0      0 10.9.0.2:80             118.117.169.156:64851   SYN_RECV   
+tcp        0      0 10.9.0.2:80             79.165.45.93:13310      SYN_RECV   
+tcp        0      0 10.9.0.2:80             91.59.124.199:44806     SYN_RECV   
+tcp        0      0 10.9.0.2:38078          151.101.242.132:80      TIME_WAIT  
+tcp        0      0 10.9.0.2:80             92.114.162.204:20032    SYN_RECV   
+tcp        0      0 10.9.0.2:80             5.192.136.91:1206       SYN_RECV   
+tcp        0      0 10.9.0.2:80             116.122.57.16:57502     SYN_RECV   
+tcp        0      0 10.9.0.2:80             104.252.112.252:38549   SYN_RECV   
+tcp        0      0 10.9.0.2:80             172.54.140.107:46418    SYN_RECV   
+tcp        0      0 10.9.0.2:80             2.237.31.225:52709      SYN_RECV   
+udp        0      0 127.0.0.11:44061        0.0.0.0:*                          
+----------------------------------------
+Timestamp: Wed Aug 28 12:05:33 UTC 2024
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.11:43179        0.0.0.0:*               LISTEN     
+tcp        0      0 10.9.0.2:80             92.226.230.33:61766     SYN_RECV   
+tcp        0      0 10.9.0.2:80             32.111.36.72:5896       SYN_RECV   
+tcp        0      0 10.9.0.2:80             250.250.145.163:13915   SYN_RECV   
+tcp        0      0 10.9.0.2:80             187.230.153.100:20072   SYN_RECV   
+tcp        0      0 10.9.0.2:80             118.117.169.156:64851   SYN_RECV   
+tcp        0      0 10.9.0.2:80             79.165.45.93:13310      SYN_RECV   
+tcp        0      0 10.9.0.2:80             91.59.124.199:44806     SYN_RECV   
+tcp        0      0 10.9.0.2:38078          151.101.242.132:80      TIME_WAIT  
+tcp        0      0 10.9.0.2:80             92.114.162.204:20032    SYN_RECV   
+tcp        0      0 10.9.0.2:80             5.192.136.91:1206       SYN_RECV   
+tcp        0      0 10.9.0.2:80             116.122.57.16:57502     SYN_RECV   
+tcp        0      0 10.9.0.2:80             104.252.112.252:38549   SYN_RECV   
+tcp        0      0 10.9.0.2:80             172.54.140.107:46418    SYN_RECV   
+tcp        0      0 10.9.0.2:80             2.237.31.225:52709      SYN_RECV   
+udp        0      0 127.0.0.11:44061        0.0.0.0:*                          
+----------------------------------------
+Timestamp: Wed Aug 28 12:05:36 UTC 2024
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.11:43179        0.0.0.0:*               LISTEN     
+tcp        0      0 10.9.0.2:80             92.226.230.33:61766     SYN_RECV   
+tcp        0      0 10.9.0.2:80             32.111.36.72:5896       SYN_RECV   
+tcp        0      0 10.9.0.2:80             207.136.236.160:20966   SYN_RECV   
+tcp        0      0 10.9.0.2:80             250.250.145.163:13915   SYN_RECV   
+tcp        0      0 10.9.0.2:80             187.230.153.100:20072   SYN_RECV   
+tcp        0      0 10.9.0.2:80             118.117.169.156:64851   SYN_RECV   
+tcp        0      0 10.9.0.2:80             79.165.45.93:13310      SYN_RECV   
+tcp        0      0 10.9.0.2:80             35.17.127.216:51984     SYN_RECV   
+tcp        0      0 10.9.0.2:80             91.59.124.199:44806     SYN_RECV   
+tcp        0      0 10.9.0.2:38078          151.101.242.132:80      TIME_WAIT  
+tcp        0      0 10.9.0.2:80             16.29.14.200:22583      SYN_RECV   
+tcp        0      0 10.9.0.2:80             92.114.162.204:20032    SYN_RECV   
+tcp        0      0 10.9.0.2:80             5.192.136.91:1206       SYN_RECV   
+tcp        0      0 10.9.0.2:80             116.122.57.16:57502     SYN_RECV   
+tcp        0      0 10.9.0.2:80             104.252.112.252:38549   SYN_RECV   
+tcp        0      0 10.9.0.2:80             172.54.140.107:46418    SYN_RECV   
+tcp        0      0 10.9.0.2:80             2.237.31.225:52709      SYN_RECV   
+udp        0      0 127.0.0.11:44061        0.0.0.0:*                          
+----------------------------------------
+Timestamp: Wed Aug 28 12:05:39 UTC 2024
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.11:43179        0.0.0.0:*               LISTEN     
+tcp        0      0 10.9.0.2:80             92.226.230.33:61766     SYN_RECV   
+tcp        0      0 10.9.0.2:80             32.111.36.72:5896       SYN_RECV   
+tcp        0      0 10.9.0.2:80             207.136.236.160:20966   SYN_RECV   
+tcp        0      0 10.9.0.2:80             250.250.145.163:13915   SYN_RECV   
+tcp        0      0 10.9.0.2:80             187.230.153.100:20072   SYN_RECV   
+tcp        0      0 10.9.0.2:80             118.117.169.156:64851   SYN_RECV   
+tcp        0      0 10.9.0.2:80             79.165.45.93:13310      SYN_RECV   
+tcp        0      0 10.9.0.2:80             35.17.127.216:51984     SYN_RECV   
+tcp        0      0 10.9.0.2:80             91.59.124.199:44806     SYN_RECV   
+tcp        0      0 10.9.0.2:38078          151.101.242.132:80      TIME_WAIT  
+tcp        0      0 10.9.0.2:80             16.29.14.200:22583      SYN_RECV   
+tcp        0      0 10.9.0.2:80             92.114.162.204:20032    SYN_RECV   
+tcp        0      0 10.9.0.2:80             5.192.136.91:1206       SYN_RECV   
+tcp        0      0 10.9.0.2:80             116.122.57.16:57502     SYN_RECV   
+tcp        0      0 10.9.0.2:80             104.252.112.252:38549   SYN_RECV   
+tcp        0      0 10.9.0.2:80             172.54.140.107:46418    SYN_RECV   
+tcp        0      0 10.9.0.2:80             2.237.31.225:52709      SYN_RECV   
+udp        0      0 127.0.0.11:44061        0.0.0.0:*                          
+----------------------------------------
+Timestamp: Wed Aug 28 12:05:42 UTC 2024
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.11:43179        0.0.0.0:*               LISTEN     
+tcp        0      0 10.9.0.2:80             92.226.230.33:61766     SYN_RECV   
+tcp        0      0 10.9.0.2:80             32.111.36.72:5896       SYN_RECV   
+tcp        0      0 10.9.0.2:80             207.136.236.160:20966   SYN_RECV   
+tcp        0      0 10.9.0.2:80             250.250.145.163:13915   SYN_RECV   
+tcp        0      0 10.9.0.2:80             187.230.153.100:20072   SYN_RECV   
+tcp        0      0 10.9.0.2:80             118.117.169.156:64851   SYN_RECV   
+tcp        0      0 10.9.0.2:80             79.165.45.93:13310      SYN_RECV   
+tcp        0      0 10.9.0.2:80             35.17.127.216:51984     SYN_RECV   
+tcp        0      0 10.9.0.2:80             91.59.124.199:44806     SYN_RECV   
+tcp        0      0 10.9.0.2:38078          151.101.242.132:80      TIME_WAIT  
+tcp        0      0 10.9.0.2:80             16.29.14.200:22583      SYN_RECV   
+tcp        0      0 10.9.0.2:80             92.114.162.204:20032    SYN_RECV   
+tcp        0      0 10.9.0.2:80             5.192.136.91:1206       SYN_RECV   
+tcp        0      0 10.9.0.2:80             116.122.57.16:57502     SYN_RECV   
+tcp        0      0 10.9.0.2:80             104.252.112.252:38549   SYN_RECV   
+tcp        0      0 10.9.0.2:80             172.54.140.107:46418    SYN_RECV   
+tcp        0      0 10.9.0.2:80             2.237.31.225:52709      SYN_RECV   
+udp        0      0 127.0.0.11:44061        0.0.0.0:*                          
+----------------------------------------
+Timestamp: Wed Aug 28 12:05:45 UTC 2024
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.11:43179        0.0.0.0:*               LISTEN     
+tcp        0      0 10.9.0.2:80             92.226.230.33:61766     SYN_RECV   
+tcp        0      0 10.9.0.2:80             32.111.36.72:5896       SYN_RECV   
+tcp        0      0 10.9.0.2:80             207.136.236.160:20966   SYN_RECV   
+tcp        0      0 10.9.0.2:80             250.250.145.163:13915   SYN_RECV   
+tcp        0      0 10.9.0.2:80             187.230.153.100:20072   SYN_RECV   
+tcp        0      0 10.9.0.2:80             118.117.169.156:64851   SYN_RECV   
+tcp        0      0 10.9.0.2:80             79.165.45.93:13310      SYN_RECV   
+tcp        0      0 10.9.0.2:80             35.17.127.216:51984     SYN_RECV   
+tcp        0      0 10.9.0.2:80             91.59.124.199:44806     SYN_RECV   
+tcp        0      0 10.9.0.2:38078          151.101.242.132:80      TIME_WAIT  
+tcp        0      0 10.9.0.2:80             16.29.14.200:22583      SYN_RECV   
+tcp        0      0 10.9.0.2:80             92.114.162.204:20032    SYN_RECV   
+tcp        0      0 10.9.0.2:80             5.192.136.91:1206       SYN_RECV   
+tcp        0      0 10.9.0.2:80             116.122.57.16:57502     SYN_RECV   
+tcp        0      0 10.9.0.2:80             104.252.112.252:38549   SYN_RECV   
+tcp        0      0 10.9.0.2:80             172.54.140.107:46418    SYN_RECV   
+tcp        0      0 10.9.0.2:80             2.237.31.225:52709      SYN_RECV   
+udp        0      0 127.0.0.11:44061        0.0.0.0:*                          
+----------------------------------------
+Timestamp: Wed Aug 28 12:05:48 UTC 2024
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.11:43179        0.0.0.0:*               LISTEN     
+tcp        0      0 10.9.0.2:80             92.226.230.33:61766     SYN_RECV   
+tcp        0      0 10.9.0.2:80             32.111.36.72:5896       SYN_RECV   
+tcp        0      0 10.9.0.2:80             207.136.236.160:20966   SYN_RECV   
+tcp        0      0 10.9.0.2:80             250.250.145.163:13915   SYN_RECV   
+tcp        0      0 10.9.0.2:80             187.230.153.100:20072   SYN_RECV   
+tcp        0      0 10.9.0.2:80             118.117.169.156:64851   SYN_RECV   
+tcp        0      0 10.9.0.2:80             79.165.45.93:13310      SYN_RECV   
+tcp        0      0 10.9.0.2:80             35.17.127.216:51984     SYN_RECV   
+tcp        0      0 10.9.0.2:80             91.59.124.199:44806     SYN_RECV   
+tcp        0      0 10.9.0.2:80             16.29.14.200:22583      SYN_RECV   
+tcp        0      0 10.9.0.2:80             92.114.162.204:20032    SYN_RECV   
+tcp        0      0 10.9.0.2:80             5.192.136.91:1206       SYN_RECV   
+tcp        0      0 10.9.0.2:80             116.122.57.16:57502     SYN_RECV   
+tcp        0      0 10.9.0.2:80             104.252.112.252:38549   SYN_RECV   
+tcp        0      0 10.9.0.2:80             172.54.140.107:46418    SYN_RECV   
+tcp        0      0 10.9.0.2:80             2.237.31.225:52709      SYN_RECV   
+udp        0      0 127.0.0.11:44061        0.0.0.0:*                          
+----------------------------------------
+Timestamp: Wed Aug 28 12:05:51 UTC 2024
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.11:43179        0.0.0.0:*               LISTEN     
+tcp        0      0 10.9.0.2:80             92.226.230.33:61766     SYN_RECV   
+tcp        0      0 10.9.0.2:80             32.111.36.72:5896       SYN_RECV   
+tcp        0      0 10.9.0.2:80             207.136.236.160:20966   SYN_RECV   
+tcp        0      0 10.9.0.2:80             250.250.145.163:13915   SYN_RECV   
+tcp        0      0 10.9.0.2:80             187.230.153.100:20072   SYN_RECV   
+tcp        0      0 10.9.0.2:80             118.117.169.156:64851   SYN_RECV   
+tcp        0      0 10.9.0.2:80             79.165.45.93:13310      SYN_RECV   
+tcp        0      0 10.9.0.2:80             35.17.127.216:51984     SYN_RECV   
+tcp        0      0 10.9.0.2:80             91.59.124.199:44806     SYN_RECV   
+tcp        0      0 10.9.0.2:80             16.29.14.200:22583      SYN_RECV   
+tcp        0      0 10.9.0.2:80             92.114.162.204:20032    SYN_RECV   
+tcp        0      0 10.9.0.2:80             5.192.136.91:1206       SYN_RECV   
+tcp        0      0 10.9.0.2:80             116.122.57.16:57502     SYN_RECV   
+tcp        0      0 10.9.0.2:80             104.252.112.252:38549   SYN_RECV   
+tcp        0      0 10.9.0.2:80             172.54.140.107:46418    SYN_RECV   
+tcp        0      0 10.9.0.2:80             2.237.31.225:52709      SYN_RECV   
+udp        0      0 127.0.0.11:44061        0.0.0.0:*                          
+----------------------------------------
+Timestamp: Wed Aug 28 12:05:54 UTC 2024
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.11:43179        0.0.0.0:*               LISTEN     
+tcp        0      0 10.9.0.2:80             92.226.230.33:61766     SYN_RECV   
+tcp        0      0 10.9.0.2:80             32.111.36.72:5896       SYN_RECV   
+tcp        0      0 10.9.0.2:80             207.136.236.160:20966   SYN_RECV   
+tcp        0      0 10.9.0.2:80             250.250.145.163:13915   SYN_RECV   
+tcp        0      0 10.9.0.2:80             187.230.153.100:20072   SYN_RECV   
+tcp        0      0 10.9.0.2:80             79.165.45.93:13310      SYN_RECV   
+tcp        0      0 10.9.0.2:80             35.17.127.216:51984     SYN_RECV   
+tcp        0      0 10.9.0.2:80             91.59.124.199:44806     SYN_RECV   
+tcp        0      0 10.9.0.2:80             16.29.14.200:22583      SYN_RECV   
+tcp        0      0 10.9.0.2:80             92.114.162.204:20032    SYN_RECV   
+tcp        0      0 10.9.0.2:80             5.192.136.91:1206       SYN_RECV   
+tcp        0      0 10.9.0.2:80             116.122.57.16:57502     SYN_RECV   
+tcp        0      0 10.9.0.2:80             104.252.112.252:38549   SYN_RECV   
+tcp        0      0 10.9.0.2:80             172.54.140.107:46418    SYN_RECV   
+tcp        0      0 10.9.0.2:80             2.237.31.225:52709      SYN_RECV   
+udp        0      0 127.0.0.11:44061        0.0.0.0:*                          
+----------------------------------------
+Timestamp: Wed Aug 28 12:05:57 UTC 2024
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.11:43179        0.0.0.0:*               LISTEN     
+tcp        0      0 10.9.0.2:80             92.226.230.33:61766     SYN_RECV   
+tcp        0      0 10.9.0.2:80             32.111.36.72:5896       SYN_RECV   
+tcp        0      0 10.9.0.2:80             207.136.236.160:20966   SYN_RECV   
+tcp        0      0 10.9.0.2:80             250.250.145.163:13915   SYN_RECV   
+tcp        0      0 10.9.0.2:80             187.230.153.100:20072   SYN_RECV   
+tcp        0      0 10.9.0.2:80             79.165.45.93:13310      SYN_RECV   
+tcp        0      0 10.9.0.2:80             35.17.127.216:51984     SYN_RECV   
+tcp        0      0 10.9.0.2:80             91.59.124.199:44806     SYN_RECV   
+tcp        0      0 10.9.0.2:80             16.29.14.200:22583      SYN_RECV   
+tcp        0      0 10.9.0.2:80             92.114.162.204:20032    SYN_RECV   
+tcp        0      0 10.9.0.2:80             5.192.136.91:1206       SYN_RECV   
+tcp        0      0 10.9.0.2:80             116.122.57.16:57502     SYN_RECV   
+tcp        0      0 10.9.0.2:80             104.252.112.252:38549   SYN_RECV   
+tcp        0      0 10.9.0.2:80             172.54.140.107:46418    SYN_RECV   
+tcp        0      0 10.9.0.2:80             2.237.31.225:52709      SYN_RECV   
+udp        0      0 127.0.0.11:44061        0.0.0.0:*                          
+----------------------------------------
+Timestamp: Wed Aug 28 12:06:00 UTC 2024
+Active Internet connections (servers and established)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN     
+tcp        0      0 127.0.0.11:43179        0.0.0.0:*               LISTEN     
+tcp        0      0 10.9.0.2:80             92.226.230.33:61766     SYN_RECV   
+tcp        0      0 10.9.0.2:80             32.111.36.72:5896       SYN_RECV   
+tcp        0      0 10.9.0.2:80             207.136.236.160:20966   SYN_RECV   
+tcp        0      0 10.9.0.2:80             250.250.145.163:13915   SYN_RECV   
+tcp        0      0 10.9.0.2:80             187.230.153.100:20072   SYN_RECV   
+tcp        0      0 10.9.0.2:80             79.165.45.93:13310      SYN_RECV   
+tcp        0      0 10.9.0.2:80             35.17.127.216:51984     SYN_RECV   
+tcp        0      0 10.9.0.2:80             91.59.124.199:44806     SYN_RECV   
+tcp        0      0 10.9.0.2:80             16.29.14.200:22583      SYN_RECV   
+tcp        0      0 10.9.0.2:80             92.114.162.204:20032    SYN_RECV   
+tcp        0      0 10.9.0.2:80             5.192.136.91:1206       SYN_RECV   
+tcp        0      0 10.9.0.2:80             116.122.57.16:57502     SYN_RECV   
+tcp        0      0 10.9.0.2:80             104.252.112.252:38549   SYN_RECV   
+tcp        0      0 10.9.0.2:80             172.54.140.107:46418    SYN_RECV   
+tcp        0      0 10.9.0.2:80             2.237.31.225:52709      SYN_RECV   
+udp        0      0 127.0.0.11:44061        0.0.0.0:*                          
+----------------------------------------
