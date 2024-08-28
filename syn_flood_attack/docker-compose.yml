@@ -30,7 +30,8 @@ services:
         apt-get update && 
         apt-get install -y iputils-ping net-tools &&
         pip install scapy &&
-        python/volumes/syn_flood.py
+        cd /volumes &&
+        python3 syn_flood.py
       "
     cap_add:
       - ALL
