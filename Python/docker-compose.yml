@@ -16,16 +16,16 @@ services:
       - ./volumes:/volumes
     command: >
       bash -c "
-        apt-get update &&
-        apt-get install -y net-tools tcpdump &&
-        echo \"Container started at: $(date)\" > /volumes/netstat_output.txt &&
-        httpd-foreground &
-        while true; do
-          echo \"Timestamp: $(date)\" >> /volumes/netstat_output.txt
-          netstat -tuna >> /volumes/netstat_output.txt
-          echo \"----------------------------------------\" >> /volumes/netstat_output.txt
-          sleep 3
-        done"
+      apt-get update &&
+      apt-get install -y net-tools tcpdump &&
+      echo \"Container started at: $$(date)\" > /volumes/netstat_output.txt &&
+      httpd-foreground &
+      while true; do
+        echo \"Timestamp: $$(date)\" >> /volumes/netstat_output.txt
+        netstat -tuna >> /volumes/netstat_output.txt
+        echo \"----------------------------------------\" >> /volumes/netstat_output.txt
+        sleep 10
+      done"
 
   Attacker:
     image: python:3.10
@@ -38,10 +38,12 @@ services:
         apt-get update && 
         apt-get install -y iputils-ping net-tools &&
         cd /volumes &&
+        sleep 20 &&
         python3 syn_flood.py
       "
     cap_add:
-      - ALL
+      - NET_RAW
+      - NET_ADMIN
     privileged: true
     volumes:
       - ./volumes:/volumes
@@ -53,17 +55,17 @@ services:
       net-10.9.0.0:
         ipv4_address: 10.9.0.4
     command: >
-       bash -c "
-        apt-get update &&
-        apt-get install -y iputils-ping &&
-        mkdir -p /volumes &&
-        echo \"Container started at: $(date)\" > /volumes/ping.txt &&
-        while true; do
-          echo \"Timestamp: $(date)\" >> /volumes/ping.txt
-          ping -c 1 -i 0.2 10.9.0.2 | tee -a /volumes/ping.txt
-          echo '---' >> /volumes/ping.txt
-          sleep 5
-        done"
+      bash -c "
+      apt-get update &&
+      apt-get install -y iputils-ping &&
+      mkdir -p /volumes &&
+      echo \"Container started at: $$(date)\" > /volumes/ping.txt &&
+      while true; do
+        echo \"Timestamp: $$(date)\" >> /volumes/ping.txt
+        ping -c 1 -i 0.2 10.9.0.2 | tee -a /volumes/ping.txt
+        echo '---' >> /volumes/ping.txt
+        sleep 5
+      done"
     cap_add:
       - ALL
     privileged: true
