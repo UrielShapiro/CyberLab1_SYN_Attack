@@ -60,9 +60,9 @@ services:
         echo \"Container started at: $(date)\" > /volumes/ping.txt &&
         while true; do
           echo \"Timestamp: $(date)\" >> /volumes/ping.txt
-          ping -c 10 -i 0.2 10.9.0.2 | tee -a /volumes/ping.txt
+          ping -c 1 -i 0.2 10.9.0.2 | tee -a /volumes/ping.txt
           echo '---' >> /volumes/ping.txt
-          sleep 3
+          sleep 5
         done"
     cap_add:
       - ALL
