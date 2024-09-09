@@ -38,6 +38,7 @@ services:
       bash -c "
       cd /volumes &&
       gcc -o syn_flood syn_flood.c -lm &&
+      sleep 20 &&
       ./syn_flood"
     cap_add:
       - NET_RAW
@@ -56,7 +57,7 @@ services:
       echo \"Container started at: $$(date)\" > /volumes/ping.txt &&
       while true; do
         echo \"Timestamp: $$(date)\" >> /volumes/ping.txt
-        ping -c 10 -i 0.2 10.9.0.2 | tee -a /volumes/ping.txt
+        ping -c 1 -i 0.2 10.9.0.2 | tee -a /volumes/ping.txt
         echo '---' >> /volumes/ping.txt
         sleep 5
       done"
