@@ -62,6 +62,7 @@ void handle_packet(char *packet,struct iphdr *iph, struct tcphdr *tcph)
     struct pseudo_header psh;
     int mask1, mask2, mask3, mask4; // Will be used to create a random IP address
 
+    // Generate random source IP address
     mask1 = rand() % MASK;
     mask2 = rand() % MASK;
     mask3 = rand() % MASK;
@@ -71,20 +72,20 @@ void handle_packet(char *packet,struct iphdr *iph, struct tcphdr *tcph)
 
     int source_port = (rand() % (65535 - 1024)) + 1024; // Random source port
 
-    // Creating IP Header
+    // Create IP Header
     iph->ihl = 5;                                                // Internet Header Length
     iph->version = 4;                                            // IPv4
     iph->tos = 0;                                                // Type of Service
     iph->tot_len = sizeof(struct iphdr) + sizeof(struct tcphdr); // Total length of the packet
     iph->id = htonl(54321);                                      // Id of this packet
-    iph->frag_off = 0;
+    iph->frag_off = 0;                 // Fragmentation offset
     iph->ttl = 255;                    // Time to live
     iph->protocol = IPPROTO_TCP;       // Protocol
     iph->check = 0;                    // Set to 0 before calculating checksum
     iph->saddr = inet_addr(src_ip);    // Source IP
     iph->daddr = inet_addr(SERVER_IP); // Destination IP
 
-    iph->check = checksum((unsigned short *)packet, iph->tot_len); // Calculate checksum for the packet
+    iph->check = checksum((unsigned short *)packet, iph->tot_len); // Calculate checksum for the IP header
 
     // Create TCP Header
     tcph->source = htons(source_port); // Source port
@@ -93,13 +94,13 @@ void handle_packet(char *packet,struct iphdr *iph, struct tcphdr *tcph)
     tcph->ack_seq = 0;                 // Acknowledgement number of the packet (doesn't matter in our case)
     tcph->doff = 5;                    // tcp header size
     tcph->fin = 0;
-    tcph->syn = 1; // SYN flag is set to TRUE
+    tcph->syn = 1;                     // SYN flag is set to TRUE
     tcph->rst = 0;
     tcph->psh = 0;
-    tcph->ack = 0;
+    tcph->ack = 0; 
     tcph->urg = 0;
     tcph->window = htons(5840); // maximum allowed window size
-    tcph->check = 0;            // Filled later by pseudo header
+    tcph->check = 0;            // Checksum will be filled later by pseudo header
     tcph->urg_ptr = 0;
 
     // Assign values to pseudo header
@@ -107,17 +108,17 @@ void handle_packet(char *packet,struct iphdr *iph, struct tcphdr *tcph)
     psh.dest_address = inet_addr(SERVER_IP);
     psh.placeholder = 0;
     psh.protocol = IPPROTO_TCP;
-    psh.tcp_length = htons(sizeof(struct tcphdr));
+    psh.tcp_length = htons(sizeof(struct tcphdr));  // IP Header include TCP Header size
 
-    int psize = sizeof(struct pseudo_header) + sizeof(struct tcphdr);
-    char *pseudogram = (char *)malloc(psize);
+    int psize = sizeof(struct pseudo_header) + sizeof(struct tcphdr);   // Size of pseudo header
+    char *pseudo_packet = (char *)malloc(psize);    // pseudo packet mimics the original packet, to calculate checksum
 
-    memcpy(pseudogram, (char *)&psh, sizeof(struct pseudo_header));
-    memcpy(pseudogram + sizeof(struct pseudo_header), tcph, sizeof(struct tcphdr));
+    memcpy(pseudo_packet, (char *)&psh, sizeof(struct pseudo_header));                  // Copy pseudo header to the packet
+    memcpy(pseudo_packet + sizeof(struct pseudo_header), tcph, sizeof(struct tcphdr));  // Copy TCP header to the packet
 
-    tcph->check = checksum((unsigned short *)pseudogram, psize); // Calculate checksum for the packet
+    tcph->check = checksum((unsigned short *)pseudo_packet, psize); // Calculate checksum and assign to TCP header
     
-    free(pseudogram);
+    free(pseudo_packet);
 }
 
 int main()
@@ -176,11 +177,11 @@ int main()
     {
         for (size_t i = 0; i < NUM_OF_TRIES; i++)
         {
-            handle_packet(packet,iph,tcph);
+            handle_packet(packet,iph,tcph); // Handle the packet (Assign values to IP and TCP headers)
 
             // Send the packet
-            struct sockaddr_in dest;
-            dest.sin_family = AF_INET;
+            struct sockaddr_in dest;                        // Destination address
+            dest.sin_family = AF_INET;                      // Address family is IPv4
             dest.sin_port = htons(SERVER_PORT);
             dest.sin_addr.s_addr = inet_addr(SERVER_IP);
 
@@ -210,7 +211,7 @@ int main()
     fprintf(log_file, "Average time per packet: %.3f ms\n", avg_time);
 
     t = time(NULL);
-    fprintf(log_file, "end time: %s", ctime(&t));
+    fprintf(log_file, "End time: %s", ctime(&t));
 
     close(sock);
     fclose(log_file);
