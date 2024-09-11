@@ -41,8 +41,7 @@ services:
       sleep 20 &&
       ./syn_flood"
     cap_add:
-      - NET_RAW
-      - NET_ADMIN
+      - ALL
     privileged: true
 
   Monitor:

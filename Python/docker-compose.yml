@@ -42,8 +42,7 @@ services:
         python3 syn_flood.py
       "
     cap_add:
-      - NET_RAW
-      - NET_ADMIN
+      - ALL
     privileged: true
     volumes:
       - ./volumes:/volumes
