@@ -135,7 +135,7 @@ int main()
     if (log_file == NULL)
     {
         printf("Error opening file!\n");
-        exit(1);
+        exit(EXIT_FAILURE);
     }
 
     // Record start time
@@ -179,9 +179,9 @@ int main()
         {
             handle_packet(packet,iph,tcph); // Handle the packet (Assign values to IP and TCP headers)
 
-            // Send the packet
-            struct sockaddr_in dest;                        // Destination address
-            dest.sin_family = AF_INET;                      // Address family is IPv4
+            // Define the destination address
+            struct sockaddr_in dest;                     
+            dest.sin_family = AF_INET;                      
             dest.sin_port = htons(SERVER_PORT);
             dest.sin_addr.s_addr = inet_addr(SERVER_IP);
 
@@ -216,5 +216,5 @@ int main()
     close(sock);
     fclose(log_file);
     printf("\nConnection closed. Results logged to syn_flood_log.txt\n");
-    return 0;
+    return EXIT_SUCCESS;
 }
