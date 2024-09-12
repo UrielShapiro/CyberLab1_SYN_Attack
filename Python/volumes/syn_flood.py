@@ -87,7 +87,6 @@ def syn_flood(s: socket.socket,target_ip, target_port, num_packets, iterations):
                 send_time = end_time - start_time
                 send_time_ms = send_time * 1000
                 log_file.write(f"{iterations + i} {send_time_ms:.3f} ms\n")
-                log_file.flush()
 
     except IOError as e:
         print(f"Error opening file: {e}")
